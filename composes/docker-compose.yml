@@ -1,0 +1,13 @@
+version: "3"
+services:
+  sass:
+    image: "debian:stable"
+    ports:
+      - "80:80"
+      - "443:443"
+      - "5000:5000"
+    networks: 
+      - backend
+networks:
+  backend:
+    external: true
