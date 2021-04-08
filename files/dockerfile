@@ -1,4 +1,4 @@
-FROM debian:stable AS sass
+FROM debian:stable AS sasss
 RUN apt-get update && apt-get install -y locales git curl && rm -rf /var/lib/apt/lists/* \
         && curl -sL https://deb.nodesource.com/setup_14.x | bash - && apt install -y nodejs \
         && localedef -i es_ES -c -f UTF-8 -A /usr/share/locale/locale.alias es_ES.UTF-8
