@@ -1,16 +1,27 @@
 version: "3"
 services:
   sass:
+    container_name: backend
     image: "sassv1"
     ports:
-      - "80:5000"
+      - "443:5000"
     networks: 
-      - backend
+      backend:
+        ipv4_address: 10.5.0.7
 
   mongo:
-    image: "mongosass"
+    container_name: mongosass
+    image: "a19matrivort/mongosass"
+    ports:
+      - "27017:27017"
     networks:
-      - backend
+      backend:
+        ipv4_address: 10.5.0.6
+
 networks:
   backend:
-    external: true
+    driver: bridge
+    ipam:
+     config:
+       - subnet: 10.5.0.0/16
+         gateway: 10.5.0.1
