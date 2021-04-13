@@ -1,0 +1,1 @@
+{"options":{"validator":{"ip":{"$regex":"(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}"},"username":{"$type":"string"},"passwd":{"$type":"string"}},"validationLevel":"strict"},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_"}],"uuid":"32d18ab9411a4cbba3640846a17691e6","collectionName":"user"}

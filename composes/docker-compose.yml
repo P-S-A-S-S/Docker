@@ -7,7 +7,7 @@ services:
     networks: 
       - backend
 
-  mongo:
+  mongodb:
     image: "mongosass"
     networks:
       - backend
