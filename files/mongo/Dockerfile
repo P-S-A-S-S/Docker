@@ -1,7 +1,7 @@
 FROM mongo:latest AS mongosass
 
 
-RUN mkdir -p /data/sass && echo "dbpath = /data/sass" > /etc/mongodb.conf \
+RUN mkdir -p /data/sass \
 && chown -R mongodb:mongodb /data/sass
 
 
@@ -10,4 +10,4 @@ RUN mongod -fork --logpath /var/log/mongodb.log --dbpath /data/sass && mongorest
 
 VOLUME /data/sass
 
-CMD mongod --dbpath /data/sass
+CMD mongod --dbpath /data/sass --bind_ip 0.0.0.0
