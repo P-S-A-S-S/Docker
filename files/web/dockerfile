@@ -9,5 +9,5 @@ RUN openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -nodes -day
 WORKDIR /etc/Backend
 RUN npm install
 ENV LANG es_ES.utf8
-EXPOSE 5000
-CMD ["node","./index.js"]
+ARG MONGO_URL
+CMD ["node", "./index.js"]

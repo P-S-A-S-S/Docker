@@ -2,16 +2,19 @@ version: "3"
 services:
   sass:
     container_name: backend
-    image: "sassv1"
+    image: "38f7d469ef48"
     ports:
       - "443:5000"
+      - "1234:1234"
+    environment:
+      - MONGO_URL=mongosass
     networks: 
       backend:
         ipv4_address: 10.5.0.7
 
   mongo:
     container_name: mongosass
-    image: "a19matrivort/mongosass"
+    image: "2691853d2bcf"
     networks:
       backend:
         ipv4_address: 10.5.0.6
