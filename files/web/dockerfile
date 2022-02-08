@@ -1,13 +1,29 @@
 FROM debian:stable AS sass
+ARG FRONT
 RUN apt-get update && apt-get install -y locales git curl openssl && rm -rf /var/lib/apt/lists/* \
         && curl -sL https://deb.nodesource.com/setup_14.x | bash - && apt install -y nodejs \
         && localedef -i es_ES -c -f UTF-8 -A /usr/share/locale/locale.alias es_ES.UTF-8
 WORKDIR /etc
 COPY ./Backend ./Backend
+COPY ./ReactSASS ./ReactSASS
+ENV REACT_APP_FRONT_URL $FRONT
 WORKDIR /etc/Backend/certs
 RUN openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -nodes -days 365 -subj "/C=ES/ST=Spain/L=Barcelona/O=sass Name/OU=Org/CN=www.example.com"
 WORKDIR /etc/Backend
+RUN echo "Installing Backend dependencies"
 RUN npm install
+WORKDIR /etc/ReactSASS
+RUN echo "Installing Frontend dependencies"
+RUN npm install
+RUN ls
+RUN echo "Building the front"
+RUN npm run build
+RUN echo "Removing public in backend"
+RUN rm -rf /etc/Backend/public
+RUN echo "Copyng public from frontend"
+RUN cp -r build /etc/Backend/public
+WORKDIR /etc/Backend
 ENV LANG es_ES.utf8
-ARG MONGO_URL
+RUN echo $FRONT
+RUN echo $REACT_APP_FRONT_URL
 CMD ["node", "./index.js"]

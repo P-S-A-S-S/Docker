@@ -2,19 +2,20 @@ version: "3"
 services:
   sass:
     container_name: backend
-    image: "38f7d469ef48"
+    image: "stacksassimg"
     ports:
       - "443:5000"
       - "1234:1234"
     environment:
       - MONGO_URL=mongosass
+      - REACT_APP_FRONT_URL=${REACT_APP_FRONT_URL}
     networks: 
       backend:
         ipv4_address: 10.5.0.7
 
   mongo:
     container_name: mongosass
-    image: "2691853d2bcf"
+    image: "mongosassimg"
     networks:
       backend:
         ipv4_address: 10.5.0.6
@@ -25,4 +26,3 @@ networks:
     ipam:
      config:
        - subnet: 10.5.0.0/16
-         gateway: 10.5.0.1
