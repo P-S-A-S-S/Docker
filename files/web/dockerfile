@@ -1,8 +1,8 @@
 FROM debian:stable AS sass
 ARG FRONT
-RUN apt-get update && apt-get install -y locales git curl openssl && rm -rf /var/lib/apt/lists/* \
+RUN apt-get update && apt-get install -y locales git curl openssl python3-pip && rm -rf /var/lib/apt/lists/* \
         && curl -sL https://deb.nodesource.com/setup_14.x | bash - && apt install -y nodejs \
-        && localedef -i es_ES -c -f UTF-8 -A /usr/share/locale/locale.alias es_ES.UTF-8
+        && localedef -i es_ES -c -f UTF-8 -A /usr/share/locale/locale.alias es_ES.UTF-8 && pip3 install cryptography
 WORKDIR /etc
 COPY ./Backend ./Backend
 COPY ./ReactSASS ./ReactSASS
